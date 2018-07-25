@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) Proxime SpA - Todos los derechos reservados
+ * Queda expresamente prohibida la copia o reproducción total o parcial de este archivo
+ * sin el permiso expreso y por escrito de Proxime SpA.
+ * La detección de un uso no autorizado puede acarrear el inicio de acciones legales.
  */
 package io.febos.development.plugins.febos.maven.plugin;
 
