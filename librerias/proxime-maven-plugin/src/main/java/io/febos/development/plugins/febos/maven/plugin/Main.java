@@ -42,8 +42,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Int multi= 8-2;
-
         cargarCSV("/Users/michel/Desktop/lambdas.csv");
 
         List<File> poms = buscarPoms("/Users/michel/Code/Febos3-Backend/colombia/lambdas");
