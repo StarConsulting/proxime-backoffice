@@ -4,7 +4,7 @@
  * sin el permiso expreso y por escrito de Proxime SpA.
  * La detección de un uso no autorizado puede acarrear el inicio de acciones legales.
  */
-package io.febos.development.plugins.febos.maven.plugin;
+package appp.proxime.maven.plugins;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;

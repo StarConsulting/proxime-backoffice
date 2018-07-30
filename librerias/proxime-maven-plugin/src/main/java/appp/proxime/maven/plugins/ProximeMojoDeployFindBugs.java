@@ -4,7 +4,7 @@
  * sin el permiso expreso y por escrito de Proxime SpA.
  * La detección de un uso no autorizado puede acarrear el inicio de acciones legales.
  */
-package io.febos.development.plugins.febos.maven.plugin;
+package appp.proxime.maven.plugins;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -58,7 +58,7 @@ import org.xml.sax.InputSource;
  * @author Michel M. <michel@febos.cl>
  */
 @Mojo(name = "deploy-bugs")
-public class FebosMojoDeployFindBugs extends AbstractMojo {
+public class ProximeMojoDeployFindBugs extends AbstractMojo {
 
     @Parameter(defaultValue = "")
     String proyecto;
@@ -277,7 +277,7 @@ public class FebosMojoDeployFindBugs extends AbstractMojo {
             is.setCharacterStream(new StringReader(doc));
             return db.parse(is);
         } catch (Exception ex) {
-            Logger.getLogger(FebosMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProximeMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Imposible recuperar base de datos de proyectos");
         }
     }
@@ -340,7 +340,7 @@ public class FebosMojoDeployFindBugs extends AbstractMojo {
             try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
                 wr.write(postData);
             } catch (IOException ex) {
-                Logger.getLogger(FebosMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProximeMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             String line;
@@ -354,11 +354,11 @@ public class FebosMojoDeployFindBugs extends AbstractMojo {
         } catch (IllegalArgumentException e) {
             System.out.println("IllegalArgumentException posting to Slack " + e);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(FebosMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProximeMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ProtocolException ex) {
-            Logger.getLogger(FebosMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProximeMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(FebosMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProximeMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -380,7 +380,7 @@ public class FebosMojoDeployFindBugs extends AbstractMojo {
             }
             return r;
         } catch (IOException ex) {
-            Logger.getLogger(FebosMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProximeMojoDeployFindBugs.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -4,8 +4,10 @@
  * sin el permiso expreso y por escrito de Proxime SpA.
  * La detección de un uso no autorizado puede acarrear el inicio de acciones legales.
  */
-package io.febos.development.plugins.febos.maven.plugin;
+package appp.proxime.maven.plugins;
 
+import appp.proxime.maven.plugins.config.structure.ApiGateway;
+import appp.proxime.maven.plugins.config.structure.Lambda;
 import com.amazonaws.event.ProgressEvent;
 import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.apigateway.AmazonApiGateway;
@@ -28,7 +30,6 @@ import com.amazonaws.services.apigateway.model.PutIntegrationResult;
 import com.amazonaws.services.apigateway.model.PutMethodRequest;
 import com.amazonaws.services.apigateway.model.PutMethodResponseRequest;
 import com.amazonaws.services.apigateway.model.PutMethodResult;
-import com.amazonaws.services.apigateway.model.Resource;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.lambda.AWSLambda;
 import com.amazonaws.services.lambda.AWSLambdaAsync;
@@ -62,14 +63,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -83,7 +78,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author Michel M. <michel@febos.cl>
  */
 @Mojo(name = "configure")
-public class FebosMojoConfigure extends AbstractMojo {
+public class ProximeMojoConfigure extends AbstractMojo {
 
     @Parameter
     boolean update;
@@ -92,7 +87,7 @@ public class FebosMojoConfigure extends AbstractMojo {
     @Parameter(defaultValue = "")
     String credencialesAWS;
     @Parameter
-    ApiGateway apiGateway;
+    List<ApiGateway> apiGateway;
     @Parameter
     Lambda lambda;
     CustomCredentialsProvider credenciales;
@@ -383,41 +378,11 @@ public class FebosMojoConfigure extends AbstractMojo {
         }
         lambdaNuevo = false;
 
-        getLog().info("Bucando credenciales: " + credencialesAWS);
         try {
             lambdaClient = AWSLambdaClientBuilder.defaultClient();
             s3client = AmazonS3ClientBuilder.defaultClient();
             apiClient = AmazonApiGatewayClientBuilder.defaultClient();
 
-            try {
-                if (!lambda.nombre().contains("_db_")) {
-
-                    final AWSLambdaAsync cliente = AWSLambdaAsyncClientBuilder.defaultClient();
-                    InvokeRequest invokeRequest = new InvokeRequest();
-                    String lambdaCreaUser = "";
-                    if (lambda.nombre().startsWith("co_")) {
-                        lambdaCreaUser = "io_config_ioco_db_lambda";
-                    }
-                    if (lambda.nombre().startsWith("io_")) {
-                        lambdaCreaUser = "io_config_ioco_db_lambda";
-                    }
-                    if (lambda.nombre().startsWith("cl_")) {
-                        lambdaCreaUser = "io_config_cl_db_lambda";
-                    }
-                    if (lambda.nombre().contains("_legacy_")) {
-                        lambdaCreaUser = "io_config_cl_legacy_db_lambda";
-                    }
-                    getLog().info("Creando usuario en base de datos para el lambda (" + lambdaCreaUser + ")");
-
-                    invokeRequest.setFunctionName(lambdaCreaUser);
-                    invokeRequest.setQualifier("desarrollo");
-                    invokeRequest.setPayload("{\"stage\":\"desarrollo\",\"nombreLambda\":\"" + lambda.nombre() + "\"}");
-                    InvokeResult invoke = cliente.invoke(invokeRequest);
-                    System.out.println(new String(invoke.getPayload().array()));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
             getLog().info("Subiendo package a S3 (" + (new File(lambda.localFile()).length() / 1000000) + " MB)");
             getLog().info(lambda.localFile());
@@ -685,7 +650,10 @@ public class FebosMojoConfigure extends AbstractMojo {
                     getLog().info("Re-configurando API Gateway para el lambda");
                 }
 
-                configurarApiGateway(apiGateway.api(), apiGateway.resource(), apiGateway.metodo(), lambda.nombre(), apiGateway.mapping());
+                for(ApiGateway api:apiGateway){
+                    configurarApiGateway(api.api(), api.resource(), api.metodo(), lambda.nombre(), api.mapping());
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -708,12 +676,12 @@ public class FebosMojoConfigure extends AbstractMojo {
 
     }
 
-    public void cearEndpoint(String metodo, String url, String lambda, String mapping) {
+    public void cearEndpoint(String metodo, String url, String lambda, String mapping,ApiGateway apiGateway) {
         String partId = null;
-        if (!recursoExiste(url)) {
-            partId = crearRecurso(url);
+        if (!recursoExiste(url,apiGateway)) {
+            partId = crearRecurso(url,apiGateway);
         } else {
-            partId = recursoId(url);
+            partId = recursoId(url,apiGateway);
         }
 
         boolean metodoExiste = false;
@@ -742,7 +710,7 @@ public class FebosMojoConfigure extends AbstractMojo {
         return null;
     }
 
-    public String crearRecurso(String url) {
+    public String crearRecurso(String url,ApiGateway apiGateway) {
         url = url.startsWith("/") ? url.substring(1) : url;
         url = url.endsWith("/") ? url.substring(0, url.length() - 1) : url;
         String lastId = "";
@@ -754,18 +722,18 @@ public class FebosMojoConfigure extends AbstractMojo {
                 acumulado += (j != 0) ? "/" + parts[j] : parts[j];
             }
 
-            if (!recursoExiste(acumulado + "/" + parts[i])) {
+            if (!recursoExiste(acumulado + "/" + parts[i],apiGateway)) {
                 createResource = apiClient.createResource(new CreateResourceRequest()
                         .withRestApiId(apiGateway.api())
                         .withPathPart(parts[i])
-                        .withParentId(recursoId(acumulado))
+                        .withParentId(recursoId(acumulado,apiGateway))
                 );
             }
         }
         return createResource.getId();
     }
 
-    public void cargarRecursos() {
+    public void cargarRecursos(ApiGateway apiGateway) {
         if (recursos == null) {
             recursos = new HashMap<>();
             GetResourcesResult resources = apiClient.getResources(new GetResourcesRequest()
@@ -785,13 +753,13 @@ public class FebosMojoConfigure extends AbstractMojo {
         }
     }
 
-    public String recursoId(String url) {
-        cargarRecursos();
+    public String recursoId(String url,ApiGateway apiGateway) {
+        cargarRecursos(apiGateway);
         return recursosId.getOrDefault(url, null);
     }
 
-    public boolean recursoExiste(String url) {
-        cargarRecursos();
+    public boolean recursoExiste(String url,ApiGateway apiGateway) {
+        cargarRecursos(apiGateway);
         return recursos.getOrDefault(url, Boolean.FALSE);
     }
 
