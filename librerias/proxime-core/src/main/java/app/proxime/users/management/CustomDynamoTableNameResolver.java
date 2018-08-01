@@ -8,7 +8,7 @@ package app.proxime.users.management;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 
-public class ResolvedorDeNombresParaTablasDynamo extends DynamoDBMapperConfig.DefaultTableNameResolver {
+public class CustomDynamoTableNameResolver extends DynamoDBMapperConfig.DefaultTableNameResolver {
     private final String UNION="_";
     public static String DEFAULT_STATE="develop";
     public static String DEFAULT_COUNTRY ="global";
@@ -17,11 +17,11 @@ public class ResolvedorDeNombresParaTablasDynamo extends DynamoDBMapperConfig.De
         String stageName=DEFAULT_STATE;
         String countryName= DEFAULT_COUNTRY;
         try {
-            stageName = "";//TODO: get current stage from context singleton
+            //stageName = "";//TODO: get current stage from context singleton
         }catch(Exception e){
         }
         try {
-            countryName =""; //TODO: get current country from context singleton
+            //countryName =""; //TODO: get current country from context singleton
         }catch(Exception e){
         }
         String tableName = super.getTableName(clazz, config);
