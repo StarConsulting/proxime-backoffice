@@ -2,8 +2,8 @@ package app.proxime.lambda.src.domain.services.register;
 
 import app.proxime.lambda.src.domain.user.User;
 import app.proxime.lambda.framework.context.Lambda;
-import app.proxime.lambda.src.domain.user.UserRepository;
 import app.proxime.lambda.framework.exception.LambdaException;
+import app.proxime.lambda.src.domain.user.UserRepository;
 
 import java.util.UUID;
 
@@ -12,7 +12,9 @@ public class RegisterLambda
 
     private UserRepository repository;
 
-    public RegisterLambda(UserRepository repository){
+    public RegisterLambda(
+            UserRepository repository
+    ){
         this.repository = repository;
     }
 

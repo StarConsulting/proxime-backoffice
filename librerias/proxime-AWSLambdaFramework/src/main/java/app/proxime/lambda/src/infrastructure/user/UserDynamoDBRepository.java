@@ -1,63 +1,86 @@
 package app.proxime.lambda.src.infrastructure.user;
 
-import app.proxime.lambda.src.domain.user.User;
-import app.proxime.lambda.src.domain.user.UserRepository;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UserDynamoDBRepository implements UserRepository {
+import app.proxime.lambda.src.domain.user.User;
+import app.proxime.lambda.src.domain.user.UserRepository;
+import app.proxime.lambda.src.infrastructure.dao.DynamoDBDAO;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
-    private AmazonDynamoDB client;
-    private DynamoDBMapper mapper;
+public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
+
+    private DynamoDBDAO<UserDynamoDB> dynamoDBDAO;
 
     public UserDynamoDBRepository(){
-        this.client = AmazonDynamoDBClientBuilder.standard().build();
-        this.mapper = new DynamoDBMapper(client);
+        this.dynamoDBDAO = new DynamoDBDAO<>(UserDynamoDB.class);
     }
 
 
+        return buildDomainModelFrom(userDynamoDB);
+    }
 
-    public boolean insertOrUpdate(User user){
+    @Override
+    public void insertOrUpdate(User user){
+        dynamoDBDAO.insertOrUpdate(buildPersistenceModelFrom(user));
+    }
 
-        UserDynamoDB userDynamoDB = new UserDynamoDB();
-        userDynamoDB.setId(user.getId());
-        userDynamoDB.setName(user.getName());
-        userDynamoDB.setUsername(user.getUsername());
-        userDynamoDB.setEmail(user.getEmail());
-        userDynamoDB.setPassword(user.getPassword());
-        userDynamoDB.setPhone(user.getPhone());
-        userDynamoDB.setBirthdate(user.getBirthdate());
-
-        try{
-            mapper.save(userDynamoDB);
-            return true;
-        }catch (RuntimeException ex){
-            return false;
-        }
+    @Override
+    public void insertOrUpdate(List<User> users) {
+        dynamoDBDAO.insertOrUpdate(buildPersistenceModelFrom(users));
     }
 
     @Override
     public User findByField(String field, String value) {
-        Map<String, AttributeValue> searchParameters = new HashMap<String, AttributeValue>();
-        searchParameters.put(":" + field, new AttributeValue().withS(value));
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression(field + "=:" + field)
-                .withLimit(1)
-                .withExpressionAttributeValues(searchParameters);
-        List<UserDynamoDB> scanResult = mapper.parallelScan(UserDynamoDB.class, scanExpression, 4);
+        UserDynamoDB userDynamoDB = dynamoDBDAO.getByField(field,value);
 
-        if (scanResult.isEmpty()){
-            return null;
-        }
-        UserDynamoDB userDynamoDB = scanResult.get(0);
+        return buildDomainModelFrom(userDynamoDB);
 
+    }
+
+    @Override
+    public User findByField(String field, int value) {
+        return buildDomainModelFrom(dynamoDBDAO.getByField(field, value));
+    }
+
+    @Override
+    public User findByField(String field, long value) {
+        return buildDomainModelFrom(dynamoDBDAO.getByField(field, value));
+    }
+
+    @Override
+    public List<User> getListByField(String field, String value) {
+        return buildDomainModelFrom(dynamoDBDAO.getListByField(field, value));
+    }
+
+    @Override
+    public void delete(User user) {
+        dynamoDBDAO.delete(buildPersistenceModelFrom(user));
+    }
+
+    @Override
+    public List<User> getListBySearchParameters(Map<String, AttributeValue> searchParameters, int limit) {
+        return buildDomainModelFrom(dynamoDBDAO.getListBySearchParameters(searchParameters, limit));
+    }
+
+    @Override
+    public List<User> getListBySearchParameters(Map<String, AttributeValue> searchParameters) {
+        return buildDomainModelFrom(dynamoDBDAO.getListBySearchParameters(searchParameters));
+    }
+
+    @Override
+    public List<User> query(String query, Map<String, AttributeValue> searchParameters, int limit) {
+        return buildDomainModelFrom(dynamoDBDAO.query(query,searchParameters, limit));
+    }
+
+    @Override
+    public List<User> query(String query, Map<String, AttributeValue> searchParameters) {
+        return buildDomainModelFrom(dynamoDBDAO.query(query, searchParameters));
+    }
+
+    @Override
+    public User buildDomainModelFrom(UserDynamoDB userDynamoDB) {
         return new User(
                 userDynamoDB.getId(),
                 userDynamoDB.getName(),
@@ -67,7 +90,39 @@ public class UserDynamoDBRepository implements UserRepository {
                 userDynamoDB.getPhone(),
                 userDynamoDB.getBirthdate()
         );
-
     }
+
+    public List<User> buildDomainModelFrom(List<UserDynamoDB> usersDynamoDB) {
+        List<User> users = new ArrayList<>();
+        for (UserDynamoDB userDynamoDB:usersDynamoDB) {
+            users.add(buildDomainModelFrom(userDynamoDB));
+        }
+
+        return users;
+    }
+
+    @Override
+    public UserDynamoDB buildPersistenceModelFrom(User user) {
+        UserDynamoDB userDynamoDB = new UserDynamoDB();
+        userDynamoDB.setId(user.getId());
+        userDynamoDB.setName(user.getName());
+        userDynamoDB.setUsername(user.getUsername());
+        userDynamoDB.setEmail(user.getEmail());
+        userDynamoDB.setPhone(user.getPhone());
+        userDynamoDB.setBirthdate(user.getBirthdate());
+
+        return userDynamoDB;
+    }
+
+    public List<UserDynamoDB> buildPersistenceModelFrom(List<User> users) {
+
+        List<UserDynamoDB> usersDynamoDB = new ArrayList<>();
+        for (User user:users) {
+            usersDynamoDB.add(buildPersistenceModelFrom(user));
+        }
+
+        return usersDynamoDB;
+    }
+
 }
 

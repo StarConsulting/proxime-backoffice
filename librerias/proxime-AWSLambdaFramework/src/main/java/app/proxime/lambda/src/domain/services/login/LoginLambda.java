@@ -3,13 +3,15 @@ package app.proxime.lambda.src.domain.services.login;
 import app.proxime.lambda.framework.context.Lambda;
 import app.proxime.lambda.framework.exception.LambdaException;
 import app.proxime.lambda.src.domain.user.User;
-import app.proxime.lambda.src.domain.user.UserRepository;
+import app.proxime.lambda.src.infrastructure.user.UserDynamoDBRepository;
 
 public class LoginLambda implements Lambda<LoginRequest, LoginResponse> {
 
-    private UserRepository repository;
+    private UserDynamoDBRepository repository;
 
-    public LoginLambda(UserRepository repository){
+    public LoginLambda(
+            UserDynamoDBRepository repository
+    ){
         this.repository = repository;
     }
 
