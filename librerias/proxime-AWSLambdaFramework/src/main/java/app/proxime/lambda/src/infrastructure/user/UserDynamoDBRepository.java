@@ -84,6 +84,9 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
 
     @Override
     public User buildDomainModelFrom(UserDynamoDB userDynamoDB) {
+        if (userDynamoDB == null){
+            return null;
+        }
         return new User(
                 userDynamoDB.getId(),
                 userDynamoDB.getName(),
@@ -96,6 +99,11 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
     }
 
     public List<User> buildDomainModelFrom(List<UserDynamoDB> usersDynamoDB) {
+
+        if (usersDynamoDB == null){
+            return null;
+        }
+
         List<User> users = new ArrayList<>();
         for (UserDynamoDB userDynamoDB:usersDynamoDB) {
             users.add(buildDomainModelFrom(userDynamoDB));
@@ -106,6 +114,11 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
 
     @Override
     public UserDynamoDB buildPersistenceModelFrom(User user) {
+
+        if (user == null){
+            return null;
+        }
+
         UserDynamoDB userDynamoDB = new UserDynamoDB();
         userDynamoDB.setId(user.getId());
         userDynamoDB.setName(user.getName());
@@ -118,6 +131,10 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
     }
 
     public List<UserDynamoDB> buildPersistenceModelFrom(List<User> users) {
+
+        if (users == null){
+            return null;
+        }
 
         List<UserDynamoDB> usersDynamoDB = new ArrayList<>();
         for (User user:users) {
