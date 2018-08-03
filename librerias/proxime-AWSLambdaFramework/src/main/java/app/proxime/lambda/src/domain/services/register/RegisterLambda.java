@@ -34,12 +34,12 @@ public class RegisterLambda
         );
 
 
-        User userFound = repository.findByField("username", user.getUsername());
+        User userFound = repository.getByField("username", user.getUsername());
         if (userFound != null){
             response.response = "El username especificado ya se encuentra registrado";
             return response;
         }
-        User userWithEmail = repository.findByField("email",user.getEmail());
+        User userWithEmail = repository.getByField("email",user.getEmail());
         if (userWithEmail != null){
             response.response = "El correo especificado ya se encuentra registrado";
             return response;

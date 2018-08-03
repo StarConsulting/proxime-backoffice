@@ -17,6 +17,9 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
         this.dynamoDBDAO = new DynamoDBDAO<>(UserDynamoDB.class);
     }
 
+    @Override
+    public User getById(String id) {
+        UserDynamoDB userDynamoDB = this.dynamoDBDAO.getById(id);
 
         return buildDomainModelFrom(userDynamoDB);
     }
@@ -32,7 +35,7 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
     }
 
     @Override
-    public User findByField(String field, String value) {
+    public User getByField(String field, String value) {
         UserDynamoDB userDynamoDB = dynamoDBDAO.getByField(field,value);
 
         return buildDomainModelFrom(userDynamoDB);
@@ -40,12 +43,12 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
     }
 
     @Override
-    public User findByField(String field, int value) {
+    public User getByField(String field, int value) {
         return buildDomainModelFrom(dynamoDBDAO.getByField(field, value));
     }
 
     @Override
-    public User findByField(String field, long value) {
+    public User getByField(String field, long value) {
         return buildDomainModelFrom(dynamoDBDAO.getByField(field, value));
     }
 

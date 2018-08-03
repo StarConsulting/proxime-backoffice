@@ -20,7 +20,7 @@ public class LoginLambda implements Lambda<LoginRequest, LoginResponse> {
 
         LoginResponse response;
 
-        User user = repository.findByField("username",request.username);
+        User user = repository.getByField("username",request.username);
         if (user == null){
             response= new LoginResponse();
             response.greeting = "El username ingresado no está registrado";
