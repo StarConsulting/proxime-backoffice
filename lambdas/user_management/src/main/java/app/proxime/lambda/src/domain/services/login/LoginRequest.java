@@ -4,6 +4,6 @@ import app.proxime.lambda.framework.context.BaseRequest;
 
 public class LoginRequest extends BaseRequest {
 
-    public String username;
+    public String email;
     public String password;
 }

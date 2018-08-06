@@ -18,13 +18,21 @@ public class LoginLambda implements Lambda<LoginRequest, LoginResponse> {
     @Override
     public LoginResponse execute(LoginRequest request) throws LambdaException {
 
-        LoginResponse response;
+        LoginResponse response  = new LoginResponse();
+        ResponseInformation responseInformation = new ResponseInformation();
+        List<String> errors = new ArrayList<>();
+        User user = repository.getByField("email",request.email);
 
-        User user = repository.getByField("username",request.username);
+        //revisar ¿Porque durationToken = 0?
         if (user == null){
-            response= new LoginResponse();
-            response.greeting = "El username ingresado no está registrado";
-
+            errors.add("The email "+ request.email + " is not registered");
+            response.info = buildResponseInformation(
+                    4,
+                    "Failed authentication",
+                    errors,
+                    1000,
+                    context.getAwsRequestId()
+            );
             return response;
         }
 
