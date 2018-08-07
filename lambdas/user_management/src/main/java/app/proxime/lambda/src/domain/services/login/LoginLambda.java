@@ -1,50 +1,71 @@
 package app.proxime.lambda.src.domain.services.login;
 
+import app.proxime.lambda.ResponseMessages;
 import app.proxime.lambda.framework.context.Lambda;
+import app.proxime.lambda.framework.context.ResponseInformation;
 import app.proxime.lambda.framework.exception.LambdaException;
 import app.proxime.lambda.src.domain.user.User;
 import app.proxime.lambda.src.infrastructure.user.UserDynamoDBRepository;
+import com.amazonaws.services.lambda.runtime.Context;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class LoginLambda implements Lambda<LoginRequest, LoginResponse> {
-
     private UserDynamoDBRepository repository;
 
-    public LoginLambda(
-            UserDynamoDBRepository repository
-    ){
+    public LoginLambda(UserDynamoDBRepository repository) {
         this.repository = repository;
     }
 
-    @Override
-    public LoginResponse execute(LoginRequest request) throws LambdaException {
+    public LoginResponse execute(LoginRequest request, Context context) throws LambdaException {
 
-        LoginResponse response  = new LoginResponse();
-        ResponseInformation responseInformation = new ResponseInformation();
-        List<String> errors = new ArrayList<>();
-        User user = repository.getByField("email",request.email);
+        User user = findUserToAuthenticate(request);
+        if (userIsNull(user)) return mailError(context);
 
-        //revisar ¿Porque durationToken = 0?
-        if (user == null){
-            errors.add("The email "+ request.email + " is not registered");
-            response.info = buildResponseInformation(
-                    4,
-                    "Failed authentication",
-                    errors,
-                    1000,
-                    context.getAwsRequestId()
-            );
-            return response;
-        }
+        if(user.passwordIsIncorrect(request.password)) return passwordError(context);
 
-        if (!user.getPassword().equals(request.password)){
-            response= new LoginResponse();
-            response.greeting = "La contraseña ingresada es erronea";
+        return authenticationToken();
+    }
 
-            return response;
-        }
+    private User findUserToAuthenticate(LoginRequest request) {
+        return repository.getByField("email", request.email);
+    }
 
-        response = new LoginResponse();
-        response.greeting = "Bienvenido "+user.getName();
+    private boolean userIsNull(User user) {
+        return user == null;
+    }
+
+    private LoginResponse mailError(Context context) {
+        LoginResponse response = new LoginResponse();
+        List<String> errors = new ArrayList();
+        response.info = buildResponseInformation(ResponseMessages.EMAIL_IS_NOT_REGISTERED, errors, 1000L, context.getAwsRequestId());
         return response;
+    }
+
+    private LoginResponse passwordError(Context context) {
+        LoginResponse response = new LoginResponse();
+        List<String> errors = new ArrayList();
+        errors.add("The entered credentials are incorrect");
+        response.info = buildResponseInformation(ResponseMessages.PASSWORD_IS_INCORRECT, errors, 1000L, context.getAwsRequestId());
+        return response;
+    }
+
+    private LoginResponse authenticationToken() {
+        LoginResponse response = new LoginResponse();
+        response.accessToken = "xxxxx-xxxxx-xxxxx";
+        response.tokenDuration = 3600;
+        return response;
+    }
+
+    private ResponseInformation buildResponseInformation(ResponseMessages responseMessage, List<String> errors, long duration, String transactionId) {
+        ResponseInformation information = new ResponseInformation();
+        information.code = responseMessage.getCode();
+        information.message = responseMessage.getMessage();
+        information.errors = errors;
+        information.date = new Date();
+        information.duration = 1000;
+        information.transactionId = transactionId;
+        return information;
     }
 }
