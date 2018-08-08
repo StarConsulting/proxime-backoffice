@@ -1,6 +1,6 @@
 package app.proxime.lambda.src.infrastructure.cognito;
 
-import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient;
+import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.model.AdminInitiateAuthRequest;
 import com.amazonaws.services.cognitoidp.model.AdminInitiateAuthResult;
 import com.amazonaws.services.cognitoidp.model.AuthFlowType;
@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class CognitoAuthenticator {
 
-    private AWSCognitoIdentityProviderClient identityProvider;
+    private AWSCognitoIdentityProvider identityProvider;
     private CognitoClientCredentials clientCredentials;
 
     public CognitoAuthenticator(
-            AWSCognitoIdentityProviderClient identityProvider,
+            AWSCognitoIdentityProvider identityProvider,
             CognitoClientCredentials clientCredentials
             ){
         this.identityProvider = identityProvider;
@@ -37,8 +37,8 @@ public class CognitoAuthenticator {
 
     private AdminInitiateAuthRequest withThisUserParams(String email, String password){
         Map<String,String> authParams = new HashMap<String,String>();
-        authParams.put("email", email);
-        authParams.put("password", password);
+        authParams.put("USERNAME", email);
+        authParams.put("PASSWORD", password);
 
         return buildAuthRequest(authParams);
     }
