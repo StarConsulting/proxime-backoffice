@@ -3,6 +3,7 @@ package app.proxime.lambda.framework.context;
 import app.proxime.lambda.framework.exception.LambdaException;
 import app.proxime.lambda.framework.parser.GsonParser;
 import app.proxime.lambda.framework.parser.Parser;
+import com.amazonaws.services.lambda.runtime.Context;
 
 public class LambdaContext {
 
@@ -19,9 +20,9 @@ public class LambdaContext {
         this.parser = new Parser(new GsonParser());
     }
 
-    public String execute(String input) throws LambdaException {
+    public String execute(String input, Context context) throws LambdaException {
         BaseRequest request = parser.baseRequestFromJson(input, this.request);
-        BaseResponse response = this.lambda.execute(request);
+        BaseResponse response = this.lambda.execute(request, context);
         return parser.baseResponseToJson(response);
     }
 

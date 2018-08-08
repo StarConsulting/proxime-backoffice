@@ -37,7 +37,8 @@ public class LoginService extends BaseService {
 
         String response = interceptor.executeContext(
                 lambdaContext,
-                input.getInputString()
+                input.getInputString(),
+                context
         );
         outputStream.write(response.getBytes());
     }

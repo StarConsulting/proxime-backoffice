@@ -28,6 +28,11 @@ public class User {
         this.birthdate = birthdate;
     }
 
+    public boolean passwordIsIncorrect(String password){
+        return !this.password.equals(password);
+    }
+
+
     public String getId() {
         return id;
     }
@@ -55,4 +60,6 @@ public class User {
     public String getBirthdate() {
         return birthdate;
     }
+
+
 }

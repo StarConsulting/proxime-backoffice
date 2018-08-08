@@ -9,6 +9,7 @@ import app.proxime.lambda.framework.exception.LambdaExceptionHandler;
 import app.proxime.lambda.framework.filters.Filter;
 import app.proxime.lambda.framework.filters.FilterManager;
 import app.proxime.lambda.framework.input.Input;
+import com.amazonaws.services.lambda.runtime.Context;
 
 public class Interceptor {
 
@@ -34,9 +35,9 @@ public class Interceptor {
         return filterManager.doFilters(input);
     }
 
-    public String executeContext(LambdaContext lambdaContext, String input) throws LambdaException{
+    public String executeContext(LambdaContext lambdaContext, String input, Context context) throws LambdaException{
 
 
-        return lambdaContext.execute(input);
+        return lambdaContext.execute(input, context);
     }
 }
