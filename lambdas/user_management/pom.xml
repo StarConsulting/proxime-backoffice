@@ -42,6 +42,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- AWS Cognito-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-cognitoidp</artifactId>
+            <version>1.11.60</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
