@@ -5,6 +5,8 @@ import app.proxime.lambda.framework.context.Lambda;
 import app.proxime.lambda.framework.context.ResponseInformation;
 import app.proxime.lambda.framework.exception.LambdaException;
 import app.proxime.lambda.src.domain.user.User;
+import app.proxime.lambda.src.infrastructure.cognito.AuthenticationResponse;
+import app.proxime.lambda.src.infrastructure.cognito.CognitoClient;
 import app.proxime.lambda.src.infrastructure.user.UserDynamoDBRepository;
 import com.amazonaws.services.lambda.runtime.Context;
 import java.util.ArrayList;
@@ -20,12 +22,13 @@ public class LoginLambda implements Lambda<LoginRequest, LoginResponse> {
 
     public LoginResponse execute(LoginRequest request, Context context) throws LambdaException {
 
-        User user = findUserToAuthenticate(request);
+        /*User user = findUserToAuthenticate(request);
         if (userIsNull(user)) return mailError(context);
 
         if(user.passwordIsIncorrect(request.password)) return passwordError(context);
 
-        return authenticationToken();
+        */
+        return authenticationToken(request.email, request.password);
     }
 
     private User findUserToAuthenticate(LoginRequest request) {
@@ -51,10 +54,16 @@ public class LoginLambda implements Lambda<LoginRequest, LoginResponse> {
         return response;
     }
 
-    private LoginResponse authenticationToken() {
+    private LoginResponse authenticationToken(String email, String password) {
+
+        CognitoClient cognitoClient = new CognitoClient();
+        AuthenticationResponse authenticationResponse = cognitoClient.authenticateUser(email, password);
+
         LoginResponse response = new LoginResponse();
-        response.accessToken = "xxxxx-xxxxx-xxxxx";
-        response.tokenDuration = 3600;
+        response.accessToken = authenticationResponse.getAccessToken();
+        response.tokenDuration = authenticationResponse.getTokenDuration();
+
+
         return response;
     }
 
