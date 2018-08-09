@@ -7,7 +7,7 @@ import app.proxime.lambda.framework.service.BaseService;
 import app.proxime.lambda.src.domain.services.register.RegisterLambda;
 import app.proxime.lambda.src.domain.services.register.RegisterRequest;
 import app.proxime.lambda.src.domain.services.register.RegisterResponse;
-import app.proxime.lambda.src.infrastructure.user.CognitoUserRepository;
+import app.proxime.lambda.src.infrastructure.user.UserDynamoDBRepository;
 import com.amazonaws.services.lambda.runtime.Context;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class RegisterService extends BaseService {
 
 
         RegisterLambda registerLambda = new RegisterLambda(
-                new CognitoUserRepository()
+                new UserDynamoDBRepository()
         );
         RegisterRequest registerRequest = new RegisterRequest();
         RegisterResponse registerResponse = new RegisterResponse();

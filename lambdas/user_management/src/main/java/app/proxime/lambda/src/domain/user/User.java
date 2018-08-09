@@ -4,26 +4,28 @@ public class User {
 
     private String id;
     private String name;
-    private String phone;
     private String username;
     private String email;
     private String password;
-    private String familyName;
+    private String phone;
+    private String birthdate;
 
     public User(
+            String id,
             String name,
-            String familyName,
             String username,
             String email,
             String password,
-            String phone
+            String phone,
+            String birthdate
     ) {
+        this.id = id;
         this.name = name;
-        this.familyName = familyName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.birthdate = birthdate;
     }
 
     public User(
@@ -52,11 +54,7 @@ public class User {
         return name;
     }
 
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
@@ -72,6 +70,9 @@ public class User {
         return phone;
     }
 
+    public String getBirthdate() {
+        return birthdate;
+    }
 
 
 }
