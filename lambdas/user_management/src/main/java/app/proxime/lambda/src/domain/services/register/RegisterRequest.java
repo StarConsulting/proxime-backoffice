@@ -6,13 +6,14 @@ public class RegisterRequest extends BaseRequest {
 
     public String name;
 
+    public String familyName;
+
     public String username;
 
     public String email;
 
+    public String password;
+
     public String phone;
 
-    public String birthdate;
-
-    public String password;
 }

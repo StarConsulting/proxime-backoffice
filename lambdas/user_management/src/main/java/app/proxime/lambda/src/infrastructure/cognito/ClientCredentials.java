@@ -1,9 +1,9 @@
 package app.proxime.lambda.src.infrastructure.cognito;
 
-public class CognitoClientCredentials {
+public class ClientCredentials {
 
-    private String poolId = "us-east-2_ooraCYfEq";
-    private String clientId = "3nvgod1v5msmf4lfnc6tkodd64";
+    private String poolId = "us-east-2_79XWdam6i";
+    private String clientId = "3shmpk7593s3llevfkek2cl7jh";
 
     public String getPoolId(){
         return this.poolId;

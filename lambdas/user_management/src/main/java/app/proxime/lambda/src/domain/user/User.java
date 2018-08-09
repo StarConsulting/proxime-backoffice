@@ -4,34 +4,45 @@ public class User {
 
     private String id;
     private String name;
+    private String phone;
     private String username;
     private String email;
     private String password;
-    private String phone;
-    private String birthdate;
+    private String familyName;
 
     public User(
-            String id,
             String name,
+            String familyName,
             String username,
             String email,
             String password,
-            String phone,
-            String birthdate
+            String phone
     ) {
-        this.id = id;
         this.name = name;
+        this.familyName = familyName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.birthdate = birthdate;
     }
 
-    public boolean passwordIsIncorrect(String password){
-        return !this.password.equals(password);
+    public User(
+            String id,
+            String name,
+            String familyName,
+            String username,
+            String email,
+            String password,
+            String phone
+    ) {
+        this.id = id;
+        this.name = name;
+        this.familyName = familyName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
     }
-
 
     public String getId() {
         return id;
@@ -41,7 +52,11 @@ public class User {
         return name;
     }
 
-    public String getUsername() {
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public String getUsername(){
         return username;
     }
 
@@ -57,9 +72,6 @@ public class User {
         return phone;
     }
 
-    public String getBirthdate() {
-        return birthdate;
-    }
 
 
 }

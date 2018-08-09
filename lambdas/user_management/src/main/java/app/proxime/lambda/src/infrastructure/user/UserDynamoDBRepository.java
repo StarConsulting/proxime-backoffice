@@ -8,7 +8,7 @@ import app.proxime.lambda.src.domain.user.User;
 import app.proxime.lambda.src.domain.user.UserRepository;
 import app.proxime.lambda.src.infrastructure.dao.DynamoDBDAO;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-
+/*
 public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
 
     private DynamoDBDAO<UserDynamoDB> dynamoDBDAO;
@@ -87,6 +87,7 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
         if (userDynamoDB == null){
             return null;
         }
+
         return new User(
                 userDynamoDB.getId(),
                 userDynamoDB.getName(),
@@ -145,4 +146,4 @@ public class UserDynamoDBRepository implements UserRepository<UserDynamoDB> {
     }
 
 }
-
+*/

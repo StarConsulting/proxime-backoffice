@@ -12,19 +12,19 @@ import java.util.Map;
 public class CognitoAuthenticator {
 
     private AWSCognitoIdentityProvider identityProvider;
-    private CognitoClientCredentials clientCredentials;
+    private ClientCredentials clientCredentials;
 
     public CognitoAuthenticator(
             AWSCognitoIdentityProvider identityProvider,
-            CognitoClientCredentials clientCredentials
+            ClientCredentials clientCredentials
             ){
         this.identityProvider = identityProvider;
         this.clientCredentials = clientCredentials;
     }
 
-    public AuthenticationResponse authenticateUser(String email, String password){
+    public AuthenticationResponse authenticateUser(String username, String password){
 
-        return new AuthenticationResponse(fromTheResults(forTheRequestToCognito(withThisUserParams(email, password))));
+        return new AuthenticationResponse(fromTheResults(forTheRequestToCognito(withThisUserParams(username, password))));
     }
 
     private AuthenticationResultType fromTheResults(AdminInitiateAuthResult authResult){
@@ -35,9 +35,9 @@ public class CognitoAuthenticator {
         return identityProvider.adminInitiateAuth(authRequest);
     }
 
-    private AdminInitiateAuthRequest withThisUserParams(String email, String password){
+    private AdminInitiateAuthRequest withThisUserParams(String username, String password){
         Map<String,String> authParams = new HashMap<String,String>();
-        authParams.put("USERNAME", email);
+        authParams.put("USERNAME", username);
         authParams.put("PASSWORD", password);
 
         return buildAuthRequest(authParams);
