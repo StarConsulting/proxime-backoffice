@@ -12,11 +12,11 @@ import java.util.Map;
 public class CognitoAuthenticator {
 
     private AWSCognitoIdentityProvider identityProvider;
-    private CognitoClientCredentials clientCredentials;
+    private ClientCredentials clientCredentials;
 
     public CognitoAuthenticator(
             AWSCognitoIdentityProvider identityProvider,
-            CognitoClientCredentials clientCredentials
+            ClientCredentials clientCredentials
             ){
         this.identityProvider = identityProvider;
         this.clientCredentials = clientCredentials;
