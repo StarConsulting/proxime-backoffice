@@ -33,16 +33,12 @@ public class RegisterService extends BaseService {
 
         Interceptor interceptor = new Interceptor();
         LambdaContext lambdaContext = interceptor.buildLambdaContext(
-                registerLambda,
-                registerRequest,
-                registerResponse
+                registerLambda, registerRequest, registerResponse
         );
 
 
         String response = interceptor.executeContext(
-                lambdaContext,
-                input.getInputString(),
-                context
+                lambdaContext, input.getInputString(), context
         );
         outputStream.write(response.getBytes());}
 }

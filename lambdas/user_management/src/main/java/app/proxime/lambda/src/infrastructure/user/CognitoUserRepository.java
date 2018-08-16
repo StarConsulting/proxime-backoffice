@@ -2,8 +2,9 @@ package app.proxime.lambda.src.infrastructure.user;
 
 import app.proxime.lambda.src.domain.user.User;
 import app.proxime.lambda.src.domain.user.UserRepository;
-import app.proxime.lambda.src.infrastructure.cognito.AuthenticationResponse;
 import app.proxime.lambda.src.infrastructure.cognito.CognitoClient;
+import app.proxime.lambda.src.domain.services.register.ExternalRegisterResponse;
+import app.proxime.lambda.src.infrastructure.cognito.authentication.CognitoAuthenticationResponse;
 
 public class CognitoUserRepository implements UserRepository {
 
@@ -14,9 +15,10 @@ public class CognitoUserRepository implements UserRepository {
     }
 
     @Override
-    public void signUp(User user) {
+    public ExternalRegisterResponse signUp(User user) {
 
-        cognitoClient.registerUser(
+
+        return cognitoClient.registerUser(
                 user.getName(),
                 user.getFamilyName(),
                 user.getUsername(),
@@ -27,11 +29,9 @@ public class CognitoUserRepository implements UserRepository {
     }
 
     @Override
-    public AuthenticationResponse signin(String username, String password) {
+    public CognitoAuthenticationResponse signin(String username, String password) {
 
-        return cognitoClient.authenticateUser(username, password);
+        return cognitoClient.authenticateUser(username,password);
 
     }
-
-
 }

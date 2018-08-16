@@ -1,8 +1,8 @@
 package app.proxime.lambda.framework.input;
 
 import app.proxime.lambda.framework.context.BaseRequest;
+import app.proxime.lambda.framework.exception.InternalErrorMessages;
 import app.proxime.lambda.framework.exception.LambdaException;
-import app.proxime.lambda.framework.exception.LambdaExceptionHandler;
 import app.proxime.lambda.framework.parser.GsonParser;
 import app.proxime.lambda.framework.parser.Parser;
 import com.amazonaws.util.IOUtils;
@@ -15,22 +15,26 @@ public class Input {
 
     private String inputString;
 
-    private LambdaExceptionHandler lambdaExceptionHandler;
     private Parser parser;
 
     private Input(InputStream inputStream) throws IOException {
         this.inputString = IOUtils.toString(inputStream);
         this.parser = new Parser(new GsonParser());
+
+        if (!isValid()){
+            throw new LambdaException(
+                    InternalErrorMessages.INVALID_INPUT.getId(),
+                    InternalErrorMessages.INVALID_INPUT.getMessage()
+            );
+        }
     }
 
     private Input(Map<String, Object> mappedInput) {
-        this.lambdaExceptionHandler = new LambdaExceptionHandler();
         this.parser = new Parser(new GsonParser());
         this.inputString = parser.mapToJson(mappedInput);
     }
 
     private Input(String inputString){
-        this.lambdaExceptionHandler = new LambdaExceptionHandler();
         this.parser = new Parser(new GsonParser());
         this.inputString = inputString;
     }
@@ -48,15 +52,6 @@ public class Input {
         return input;
 }
 
-    private LambdaException buildInvalidInputLambdaException() {
-        lambdaExceptionHandler.setId("10");
-        lambdaExceptionHandler.setErrorType("Invalid input");
-        lambdaExceptionHandler.setMessage("The input format is incorrect");
-        lambdaExceptionHandler.addError("Must be a valid Json");
-
-        return lambdaExceptionHandler.throwException();
-    }
-
     private String inputStreamToString(InputStream inputStream) throws IOException {
         return IOUtils.toString(inputStream);
     }
@@ -71,7 +66,6 @@ public class Input {
         }catch (Exception ex){
             return false;
         }
-
         return true;
     }
 

@@ -1,10 +1,11 @@
 package app.proxime.lambda.src.domain.user;
 
-import app.proxime.lambda.src.infrastructure.cognito.AuthenticationResponse;
+import app.proxime.lambda.src.domain.services.authentication.ExternalAuthenticationResponse;
+import app.proxime.lambda.src.domain.services.register.ExternalRegisterResponse;
 
-public interface UserRepository <PersistenceModel>{
+public interface UserRepository{
 
-    void signUp(User user);
+    ExternalRegisterResponse signUp(User user);
 
-    AuthenticationResponse signin(String email, String password);
+    ExternalAuthenticationResponse signin(String email, String password);
 }

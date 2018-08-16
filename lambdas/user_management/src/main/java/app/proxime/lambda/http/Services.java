@@ -9,7 +9,7 @@ public class Services extends ServicesMapper {
     public Services(){
 
         declare("register", new RegisterService());
-        declare("login", new LoginService());
+        declare("authentication", new LoginService());
 
     }
 }

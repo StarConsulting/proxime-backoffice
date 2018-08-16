@@ -1,5 +1,7 @@
-package app.proxime.lambda.src.infrastructure.cognito;
+package app.proxime.lambda.src.infrastructure.cognito.register;
 
+import app.proxime.lambda.ResponseMessages;
+import app.proxime.lambda.src.infrastructure.cognito.ClientCredentials;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.model.*;
 
@@ -20,7 +22,7 @@ public class CognitoRegister {
         this.clientCredentials = clientCredentials;
     }
 
-    public void register(
+    public CognitoRegisterResponse register(
             String name,
             String familyName,
             String username,
@@ -46,7 +48,20 @@ public class CognitoRegister {
         signUpRequest.setUsername(username);
         signUpRequest.setPassword(password);
         signUpRequest.setUserAttributes(attributes);
-        identityProvider.signUp(signUpRequest);
+
+        try{
+            identityProvider.signUp(signUpRequest);
+
+            return CognitoRegisterResponse.onSuccess("Register successfully");
+
+        }catch(UsernameExistsException ex){
+            return CognitoRegisterResponse.onFailure(
+                    ResponseMessages.USERNAME_IS_ALREADY_IN_USE.getId(),
+                    ResponseMessages.USERNAME_IS_ALREADY_IN_USE.getMessage(),
+                    new ArrayList<>(),
+                    ex.getRequestId()
+            );
+        }
     }
 
     private AttributeType buildAttribute(String name, String value){

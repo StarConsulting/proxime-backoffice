@@ -5,7 +5,6 @@ import app.proxime.lambda.framework.context.BaseResponse;
 import app.proxime.lambda.framework.context.LambdaContext;
 import app.proxime.lambda.framework.context.Lambda;
 import app.proxime.lambda.framework.exception.LambdaException;
-import app.proxime.lambda.framework.exception.LambdaExceptionHandler;
 import app.proxime.lambda.framework.filters.Filter;
 import app.proxime.lambda.framework.filters.FilterManager;
 import app.proxime.lambda.framework.input.Input;
@@ -15,12 +14,10 @@ public class Interceptor {
 
     private AnnotationFinder annotationFinder;
     private FilterManager filterManager;
-    private LambdaExceptionHandler lambdaExceptionHandler;
 
     public Interceptor() {
         this.annotationFinder = new AnnotationFinder();
         this.filterManager = new FilterManager();
-        this.lambdaExceptionHandler = new LambdaExceptionHandler();
     }
 
     public LambdaContext buildLambdaContext(Lambda lambda, BaseRequest request, BaseResponse response) {

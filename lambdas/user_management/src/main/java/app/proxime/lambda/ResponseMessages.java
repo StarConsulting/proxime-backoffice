@@ -6,7 +6,12 @@ public enum ResponseMessages {
     USERNAME_IS_ALREADY_IN_USE(1, "The username is already in use"),
     EMAIL_IS_ALREADY_IN_USE(2, "The email is already in use"),
     EMAIL_IS_NOT_REGISTERED(3, "The specified email is not registered"),
-    PASSWORD_IS_INCORRECT(4, "The specified credentials are incorrect");
+    PASSWORD_IS_INCORRECT(4, "The specified credentials are incorrect"),
+    USER_NOT_EXIST(5, "The specified username does not exist"),
+    USER_NOT_CONFIRMED(6,"The specified username is not confirmed"),
+
+    ;
+
 
     private int code;
     private String message;
@@ -16,7 +21,7 @@ public enum ResponseMessages {
         this.message = message;
     }
 
-    public int getCode() {
+    public int getId() {
         return this.code;
     }
 

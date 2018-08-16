@@ -1,5 +1,9 @@
 package app.proxime.lambda.src.infrastructure.cognito;
 
+import app.proxime.lambda.src.infrastructure.cognito.authentication.CognitoAuthenticationResponse;
+import app.proxime.lambda.src.infrastructure.cognito.authentication.CognitoAuthenticator;
+import app.proxime.lambda.src.infrastructure.cognito.register.CognitoRegister;
+import app.proxime.lambda.src.infrastructure.cognito.register.CognitoRegisterResponse;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClient;
 
@@ -25,12 +29,12 @@ public class CognitoClient {
         );
     }
 
-    public AuthenticationResponse authenticateUser(String username, String password){
+    public CognitoAuthenticationResponse authenticateUser(String username, String password){
 
         return cognitoAuthenticator.authenticateUser(username,password);
     }
 
-    public void registerUser(
+    public CognitoRegisterResponse registerUser(
             String name,
             String familyName,
             String username,
@@ -39,7 +43,7 @@ public class CognitoClient {
             String phone
     ){
 
-        cognitoRegister.register(name, familyName, username, email, password, phone);
+        return cognitoRegister.register(name, familyName, username, email, password, phone);
     }
 
 
