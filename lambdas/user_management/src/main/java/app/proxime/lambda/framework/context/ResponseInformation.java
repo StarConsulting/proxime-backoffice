@@ -8,5 +8,6 @@ public class ResponseInformation {
     public String message;
     public List<String> errors;
     public Date date = new Date();
+    public long duration;
     public String transactionId;
 }
