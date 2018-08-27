@@ -1,28 +1,31 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { RegisterComponent } from './auth/register/component/register.component';
 
-import { FullLayoutComponent } from "./layouts/full/full-layout.component";
-import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
 
-import { Full_ROUTES } from "./shared/routes/full-layout.routes";
-import { CONTENT_ROUTES } from "./shared/routes/content-layout.routes";
-
-import { AuthGuard } from './shared/auth/auth-guard.service';
-
-const appRoutes: Routes = [
+const routes: Routes = [
+  /*
+    here you can add routes for your app.
+    You should specify the uri path, the component to use
+    and import the component.
+  */ 
   {
-    path: '',
-    redirectTo: 'dashboard/dashboard1',
-    pathMatch: 'full',
-  },
-  { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
-  { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES, canActivate: [AuthGuard] },
+    path:'register',
+    component: RegisterComponent
+  }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
-})
 
-export class AppRoutingModule {
-}
+/*
+  You don't need touch this for declare new routes
+*/
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ],
+})
+export class AppRoutingModule { }
