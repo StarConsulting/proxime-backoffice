@@ -63,10 +63,11 @@ const routes: Routes = [
         data: {
           title: 'Register Page'
         }
-      }   
+      }
+      
       
     ]
-  }
+  },
 ];
 
 @NgModule({

@@ -8,6 +8,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <!-- add search places form -->
+            <!-- 
             <form class="navbar-form navbar-right mt-1" role="search">
                 <div class="position-relative has-icon-right">
                     <input type="text" class="form-control round" placeholder="Search">
@@ -16,6 +18,7 @@
                     </div>
                 </div>
             </form>
+        -->
         </div>
         <div class="navbar-container">
             <div id="navbarSupportedContent">
@@ -26,6 +29,8 @@
                             <p class="d-none">fullscreen</p>
                         </a>
                     </li>
+                    <!-- add lenguage settings -->
+                    <!--
                     <li class="nav-item" ngbDropdown placement="bottom-right">
                         <a class="nav-link position-relative" id="dropdownLang" ngbDropdownToggle>
                             <i class="ft-flag font-medium-3 blue-grey darken-4"></i>
@@ -36,6 +41,7 @@
                                 <img src="./assets/img/flags/us.png" alt="English" class="langimg">
                                 <span>English</span>
                             </a>
+                            add other lenguage
                             <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('es')">
                                 <img src="./assets/img/flags/es.png" alt="Spanish" class="langimg">
                                 <span>Spanish</span>
@@ -50,10 +56,11 @@
                             </a>                            
                         </div>
                     </li>
+                -->
                     <li class="nav-item" ngbDropdown placement="bottom-right">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
-                            <span class="notification badge badge-pill badge-danger">4</span>
+                            <span class="notification badge badge-pill badge-danger"><!-- num notification --></span>
                             <p class="d-none">Notifications</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown">
@@ -61,32 +68,12 @@
                                 <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
                                     <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
                                     <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 info">New Order Received</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametitaque in, et!</span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
-                                    <i class="ft-bell warning float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 warning">New User Registered</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametitaque in </span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4">
-                                    <i class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 danger">New Order Received</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametest?</span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item noti-container py-3">
-                                    <i class="ft-bell success float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 success">New User Registered</span>
-                                        <span class="noti-text">Lorem ipsum dolor sit ametnatus aut.</span>
+                                        <span class="noti-title line-height-1 d-block text-bold-400 info"><!-- Titulo Notificacion--></span>
+                                        <span class="noti-text"><!-- descripcion notificacion --></span>
                                     </span>
                                 </a>
                             </div>
+                            <!-- Read all notificacion button to page notification -->
                             <a class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">Read All Notifications</a>
                         </div>
                     </li>

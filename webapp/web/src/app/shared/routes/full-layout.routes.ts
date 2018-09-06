@@ -74,5 +74,12 @@ export const Full_ROUTES: Routes = [
   {
     path: 'player',
     loadChildren: './player/player.module#PlayerModule'
+  },
+  /*
+  {
+    path: 'custom',
+    loadChildren: './shared/customizer/customizer.module#customaizerModule'
   }
+  */
+
 ];

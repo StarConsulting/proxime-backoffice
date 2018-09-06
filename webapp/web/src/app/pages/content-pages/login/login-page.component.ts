@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Dashboard1Component } from '../../../dashboard/dashboard1/dashboard1.component';
 
 @Component({
     selector: 'app-login-page',
@@ -17,7 +18,7 @@ export class LoginPageComponent {
 
     // On submit button click    
     onSubmit() {
-        this.loginForm.reset();
+        this.router.navigate(['/dashboard/dashboard1']);
     }
     // On Forgot password link click
     onForgotPassword() {
