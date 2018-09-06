@@ -14,10 +14,13 @@ export class SmartTableComponent {
     filterSource: LocalDataSource;
     alertSource: LocalDataSource;
 
-    constructor() {
+
+    constructor(
+    ) {
         this.source = new LocalDataSource(tableData.data); // create the source
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
         this.alertSource = new LocalDataSource(tableData.alertdata); // create the source
+
     }
 
     settings = tableData.settings;

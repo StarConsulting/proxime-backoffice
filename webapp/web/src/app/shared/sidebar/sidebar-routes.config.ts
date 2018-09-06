@@ -118,7 +118,8 @@ export const ROUTES: RouteInfo[] = [
     */
 
     /** changue the mod of view the tables */
-   { path: '/tables/smart', title: 'Smart Tables', icon: 'ft-grid', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+   { path: '/tables/smart', title: 'User administration', icon: 'ft-grid', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+   { path: '/sistem', title: 'System Administration', icon: 'ft-grid', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
   
    /*
     {
@@ -173,7 +174,6 @@ export const ROUTES: RouteInfo[] = [
     },
     */
     { path: '/calendar', title: 'Calendar', icon: 'ft-calendar', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: '/customaizer', title: 'Customaizer', icon: 'fa-spin', class:'', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
     /*
     {
         path: '', title: 'Pages', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,

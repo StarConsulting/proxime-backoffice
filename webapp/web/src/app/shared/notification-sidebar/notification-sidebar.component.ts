@@ -10,6 +10,7 @@ export class NotificationSidebarComponent implements OnInit {
   ngOnInit() {
     // notification-sidebar JS File
     $.getScript('./assets/js/notification-sidebar.js');
+
   }
 
 }

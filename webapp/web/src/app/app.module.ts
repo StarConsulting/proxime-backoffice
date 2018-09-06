@@ -21,6 +21,7 @@ import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 
 import * as $ from 'jquery';
+import { SistemComponent } from './sistem/sistem.component';
 
 
 
@@ -32,7 +33,8 @@ export function createTranslateLoader(http: HttpClient) {
     declarations: [
         AppComponent,
         FullLayoutComponent,
-        ContentLayoutComponent
+        ContentLayoutComponent,
+        SistemComponent
     ],
     imports: [
         BrowserAnimationsModule,

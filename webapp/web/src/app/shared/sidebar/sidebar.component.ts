@@ -14,14 +14,16 @@ declare var $: any;
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
 
-    constructor(private router: Router,
-        private route: ActivatedRoute, public translate: TranslateService) {
-        
-    }
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute, 
+        public translate: TranslateService
+    ) { }
 
     ngOnInit() {
         $.getScript('./assets/js/app-sidebar.js');
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+
     }
 
     //NGX Wizard - skip url change

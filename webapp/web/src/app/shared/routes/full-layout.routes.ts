@@ -7,6 +7,7 @@ export const Full_ROUTES: Routes = [
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
+
   {
     path: 'calendar',
     loadChildren: './calendar/calendar.module#CalendarsModule'
@@ -74,12 +75,8 @@ export const Full_ROUTES: Routes = [
   {
     path: 'player',
     loadChildren: './player/player.module#PlayerModule'
-  },
-  /*
-  {
-    path: 'custom',
-    loadChildren: './shared/customizer/customizer.module#customaizerModule'
   }
-  */
+
+  
 
 ];
