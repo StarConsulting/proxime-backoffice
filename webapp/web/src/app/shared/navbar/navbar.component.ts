@@ -22,8 +22,8 @@ export class NavbarComponent {
     ToggleClass() {
         if (this.toggleClass === 'ft-maximize') {
             this.toggleClass = 'ft-minimize';
-        }
-        else
+        } else {
             this.toggleClass = 'ft-maximize'
+        }
     }
 }

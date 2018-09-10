@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as Chartist from 'chartist';
-import { ChartType, ChartEvent } from "ng-chartist/dist/chartist.component";
+import { ChartType, ChartEvent } from 'ng-chartist/dist/chartist.component';
 
 declare var require: any;
 
@@ -41,7 +41,7 @@ export class Dashboard1Component {
         },
         events: {
             created(data: any): void {
-                var defs = data.svg.elem('defs');
+                const defs = data.svg.elem('defs');
                 defs.elem('linearGradient', {
                     id: 'gradient',
                     x1: 0,
@@ -94,7 +94,7 @@ export class Dashboard1Component {
         },
         events: {
             created(data: any): void {
-                var defs = data.svg.elem('defs');
+                const defs = data.svg.elem('defs');
                 defs.elem('linearGradient', {
                     id: 'linear',
                     x1: 0,
@@ -116,8 +116,7 @@ export class Dashboard1Component {
                         x1: data.x1 + 0.001
                     });
 
-                }
-                else if (data.type === 'label') {
+                } else if (data.type === 'label') {
                     data.element.attr({
                         y: 270
                     })
@@ -141,7 +140,7 @@ export class Dashboard1Component {
             axisY: {
                 low: 0,
                 scaleMinSpace: 50,
-            }            
+            }
         },
         responsiveOptions: [
             ['screen and (max-width: 640px) and (min-width: 381px)', {
@@ -161,7 +160,7 @@ export class Dashboard1Component {
         ],
         events: {
             created(data: any): void {
-                var defs = data.svg.elem('defs');
+                const defs = data.svg.elem('defs');
                 defs.elem('linearGradient', {
                     id: 'gradient2',
                     x1: 0,
@@ -195,18 +194,17 @@ export class Dashboard1Component {
                 });
             },
             draw(data: any): void {
-                var circleRadius = 4;
+                const circleRadius = 4;
                 if (data.type === 'point') {
 
-                    var circle = new Chartist.Svg('circle', {
+                    const circle = new Chartist.Svg('circle', {
                         cx: data.x,
                         cy: data.y,
                         r: circleRadius,
                         class: 'ct-point-circle'
                     });
                     data.element.replace(circle);
-                }
-                else if (data.type === 'label') {
+                } else if (data.type === 'label') {
                     // adjust label position for rotation
                     const dX = data.width / 2 + (30 - data.width)
                     data.element.attr({ x: data.element.attr('x') - dX })
@@ -235,9 +233,9 @@ export class Dashboard1Component {
         },
         events: {
             draw(data: any): void {
-                var circleRadius = 4;
+                const circleRadius = 4;
                 if (data.type === 'point') {
-                    var circle = new Chartist.Svg('circle', {
+                    const circle = new Chartist.Svg('circle', {
                         cx: data.x,
                         cy: data.y,
                         r: circleRadius,
@@ -245,8 +243,7 @@ export class Dashboard1Component {
                     });
 
                     data.element.replace(circle);
-                }
-                else if (data.type === 'label') {
+                } else if (data.type === 'label') {
                     // adjust label position for rotation
                     const dX = data.width / 2 + (30 - data.width)
                     data.element.attr({ x: data.element.attr('x') - dX })
@@ -265,7 +262,7 @@ export class Dashboard1Component {
             donut: true,
             startAngle: 0,
             labelInterpolationFnc: function (value) {
-                var total = data['donutDashboard'].series.reduce(function (prev, series) {
+                const total = data['donutDashboard'].series.reduce(function (prev, series) {
                     return prev + series.value;
                 }, 0);
                 return total + '%';
@@ -315,7 +312,7 @@ export class Dashboard1Component {
         ],
         events: {
             created(data: any): void {
-                var defs = data.svg.elem('defs');
+                const defs = data.svg.elem('defs');
                 defs.elem('linearGradient', {
                     id: 'gradient4',
                     x1: 0,
@@ -372,7 +369,7 @@ export class Dashboard1Component {
 
             },
             draw(data: any): void {
-                var barHorizontalCenter, barVerticalCenter, label, value;
+                let barHorizontalCenter, barVerticalCenter, label, value;
                 if (data.type === 'bar') {
 
                     data.element.attr({
