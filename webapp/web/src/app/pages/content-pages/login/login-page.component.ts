@@ -11,14 +11,20 @@ import { Dashboard1Component } from '../../../dashboard/dashboard1/dashboard1.co
 
 export class LoginPageComponent {
 
+  public email: string;
+  public pass: string;
+
     @ViewChild('f') loginForm: NgForm;
 
     constructor(private router: Router,
         private route: ActivatedRoute) { }
 
-    // On submit button click    
     onSubmit() {
+      if(this.email === 'admin' || this.pass === 'admin') {
         this.router.navigate(['/dashboard/dashboard1']);
+      } else {
+        alert('Usuario Incorrecto');
+      }
     }
     // On Forgot password link click
     onForgotPassword() {

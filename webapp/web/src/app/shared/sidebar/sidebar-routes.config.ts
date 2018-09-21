@@ -3,14 +3,45 @@ import { RouteInfo } from './sidebar.metadata';
 // Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [
 
-    /*
-    {
-        path: '', title: 'Dashboard', icon: 'ft-home', class: 'has-sub', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
-            { path: '/dashboard/dashboard1', title: 'Dashboard1', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/dashboard/dashboard2', title: 'Dashboard2', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-        ]
-    },
-    */
+  /** changue the mod of view the tables */
+  { path: '/dashboard/dashboard1', title: 'Dashboard', icon: 'ft-activity', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  //{ path: '/tables/smart', title: 'User administration', icon: 'ft-grid', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  {
+    path: '', title: 'Admin User', icon: 'ft-user', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/admin-user/adduser-page', title: 'Add User', icon: 'ft-plus', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/admin-user/adminuser-page', title: 'Admin User', icon: 'ft-sliders', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    ]
+  },
+  {
+    path: '', title: 'Admin Company', icon: 'ft-grid', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '/admin-company/addcompany', title: 'Add Company', icon: 'ft-plus', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '/admin-company/admincompany', title: 'Admin Company', icon: 'ft-sliders', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    ]
+  },
+  { path: '', title: 'Admin Marketing', icon: 'ft-briefcase', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  {
+    path: '', title: 'Admin Devices', icon: 'ft-smartphone', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    submenu: [
+      { path: '', title: 'Add Devices', icon: 'ft-plus', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      { path: '', title: 'Admin Devices', icon: 'ft-sliders', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    ]
+  },
+
+  { path: '/maps/fullscreen', title: 'Maps', icon: 'ft-map', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '/calendar', title: 'Calendar', icon: 'ft-calendar', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '', title: 'Settings', icon: 'ft-settings', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+
+
+  /*
+  {
+      path: '', title: 'Dashboard', icon: 'ft-home', class: 'has-sub', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
+          { path: '/dashboard/dashboard1', title: 'Dashboard1', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/dashboard/dashboard2', title: 'Dashboard2', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+      ]
+  },
+  */
    /*
     { path: '/colorpalettes', title: 'Color Palette', icon: 'ft-droplet', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/inbox', title: 'Inbox', icon: 'ft-mail', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -115,13 +146,9 @@ export const ROUTES: RouteInfo[] = [
             { path: '/forms/ngx', title: 'NGX Wizard', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
     },
-    */
-
-    /** changue the mod of view the tables */
    { path: '/tables/smart', title: 'User administration', icon: 'ft-grid', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
    { path: '/sistem', title: 'System Administration', icon: 'ft-grid', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-  
-   /*
+
     {
         path: '', title: 'Tables', icon: 'ft-grid', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
@@ -155,7 +182,6 @@ export const ROUTES: RouteInfo[] = [
             { path: '/cards/advanced', title: 'Advanced Cards', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
-    */
     {
         path: '/maps/fullscreen', title: 'Maps', icon: 'ft-map', class: '', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
@@ -163,7 +189,6 @@ export const ROUTES: RouteInfo[] = [
             //{ path: '/maps/fullscreen', title: 'Full Screen Map', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
-    /*
     {
         path: '', title: 'Charts', icon: 'ft-bar-chart-2', class: 'has-sub', badge: '2', badgeClass: 'badge badge-pill badge-success float-right mr-1 mt-1', isExternalLink: false,
         submenu: [
@@ -172,9 +197,7 @@ export const ROUTES: RouteInfo[] = [
             { path: '/charts/ngx', title: 'NGX Chart', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
-    */
     { path: '/calendar', title: 'Calendar', icon: 'ft-calendar', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    /*
     {
         path: '', title: 'Pages', icon: 'ft-copy', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [

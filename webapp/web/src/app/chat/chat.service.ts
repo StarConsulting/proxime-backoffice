@@ -22,7 +22,7 @@ export class ChatService {
             'assets/img/portrait/small/avatar-s-3.png',
             '1 hour ago',
             [
-                'Hey John, I am looking for the best admin template.',
+                'Hey John, I am looking for the best admin-user template.',
                 'Could you please help me to find it out?',
                 'It should be angular 5 bootstrap compatible.'
             ]
@@ -34,7 +34,7 @@ export class ChatService {
             '30 minutes ago',
             [
                 'Absolutely!',
-                'Apex admin is the responsive angular 5 bootstrap admin template.'
+                'Apex admin-user is the responsive angular 5 bootstrap admin-user template.'
             ]
             , 'text'),
         new Chat(
@@ -217,7 +217,7 @@ export class ChatService {
             'assets/img/portrait/small/avatar-s-8.png',
             '1 hours ago',
             [
-                'Hey John, I am looking for the best admin template.',
+                'Hey John, I am looking for the best admin-user template.',
                 'Could you please help me to find it out?',
                 'It should be angular 5 bootstrap compatible.'
             ]
@@ -229,7 +229,7 @@ export class ChatService {
             '',
             [
                 'Absolutely!',
-                'Apex admin is the responsive angular 5 bootstrap admin template.'
+                'Apex admin-user is the responsive angular 5 bootstrap admin-user template.'
             ]
             , 'text'),
         new Chat(
@@ -412,7 +412,7 @@ export class ChatService {
             'assets/img/portrait/small/avatar-s-9.png',
             '1 hours ago',
             [
-                'Hey John, I am looking for the best admin template.',
+                'Hey John, I am looking for the best admin-user template.',
                 'Could you please help me to find it out?',
                 'It should be angular 5 bootstrap compatible.'
             ]
@@ -424,7 +424,7 @@ export class ChatService {
             '',
             [
                 'Absolutely!',
-                'Apex admin is the responsive angular 5 bootstrap admin template.'
+                'Apex admin-user is the responsive angular 5 bootstrap admin-user template.'
             ]
             , 'text'),
         new Chat(
@@ -607,7 +607,7 @@ export class ChatService {
             'assets/img/portrait/small/avatar-s-14.png',
             '1 hours ago',
             [
-                'Hey John, I am looking for the best admin template.',
+                'Hey John, I am looking for the best admin-user template.',
                 'Could you please help me to find it out?',
                 'It should be angular 4 bootstrap compatible.'
             ]
@@ -619,7 +619,7 @@ export class ChatService {
             '',
             [
                 'Absolutely!',
-                'Apex admin is the responsive angular 4 bootstrap admin template.'
+                'Apex admin-user is the responsive angular 4 bootstrap admin-user template.'
             ]
             , 'text'),
         new Chat(

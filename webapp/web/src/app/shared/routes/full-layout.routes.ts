@@ -7,7 +7,14 @@ export const Full_ROUTES: Routes = [
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
-
+  {
+    path: 'admin-user',
+    loadChildren: './admin-user/admin-user.module#AdminUserModule'
+  },
+  {
+    path: 'admin-company',
+    loadChildren: './admin-company/admin-company.module#AdminCompanyModule'
+  },
   {
     path: 'calendar',
     loadChildren: './calendar/calendar.module#CalendarsModule'
