@@ -10,8 +10,10 @@ export class ComingSoonPageComponent implements OnInit {
 
     ngOnInit() {
         // countdown JS
-        $.getScript('./assets/js/coming-soon/jquery.countdown.min.js');
+      // @ts-ignore
+      $.getScript('./assets/js/coming-soon/jquery.countdown.min.js');
         // coming soon JS start working after page load
-        $.getScript('./assets/js/coming-soon/coming-soon.js');
+      // @ts-ignore
+      $.getScript('./assets/js/coming-soon/coming-soon.js');
     }
 }

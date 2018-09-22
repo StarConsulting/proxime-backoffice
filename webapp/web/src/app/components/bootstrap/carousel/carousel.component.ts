@@ -11,6 +11,7 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 export class CarouselComponent  {
   ngOnInit() { 
       //  Code formatting script
+    // @ts-ignore
       $.getScript('./assets/js/prism.min.js');
   }
   constructor(config: NgbCarouselConfig) {

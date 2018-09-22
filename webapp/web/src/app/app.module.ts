@@ -20,13 +20,6 @@ import { DragulaService } from 'ng2-dragula';
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 
-import * as $ from 'jquery';
-import { AdminuserPageComponent } from './admin-user/adminuser-page/adminuser-page.component';
-import { AdduserPageComponent } from './admin-user/adduser-page/adduser-page.component';
-import { AddcompanyComponent } from './admin-company/addcompany/addcompany.component';
-import { AdmincompanyComponent } from './admin-company/admincompany/admincompany.component';
-
-
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,10 +30,6 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         ContentLayoutComponent,
-        AdminuserPageComponent,
-        AdduserPageComponent,
-        AddcompanyComponent,
-        AdmincompanyComponent,
     ],
     imports: [
         BrowserAnimationsModule,

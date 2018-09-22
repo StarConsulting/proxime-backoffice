@@ -9,6 +9,7 @@ export class CustomizerComponent implements OnInit {
 
   ngOnInit() {
     // Customizer JS File
+    // @ts-ignore
     $.getScript('./assets/js/customizer.js');
   }
 

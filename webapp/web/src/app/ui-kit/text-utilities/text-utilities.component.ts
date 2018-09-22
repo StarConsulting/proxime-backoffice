@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TextUtilitiesComponent implements OnInit {
-  
     //  Prism js for code formating
-    ngOnInit() { 
-        $.getScript('./assets/js/prism.min.js');
+    ngOnInit() {
+        // @ts-ignore
+      $.getScript('./assets/js/prism.min.js');
     }
 }

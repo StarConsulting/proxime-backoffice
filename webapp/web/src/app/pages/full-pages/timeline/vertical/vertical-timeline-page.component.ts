@@ -23,7 +23,8 @@ export class VerticalTimelinePageComponent implements OnInit {
 
     ngOnInit() {
         // Vertical Timeline JS
-        $.getScript('./assets/js/vertical-timeline.js');
+      // @ts-ignore
+      $.getScript('./assets/js/vertical-timeline.js');
     }
 
     // Google map lat-long

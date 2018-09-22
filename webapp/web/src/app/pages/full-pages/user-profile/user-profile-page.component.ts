@@ -13,7 +13,8 @@ export class UserProfilePageComponent implements OnInit {
 
     ngOnInit() {
         // Horizontal Timeline js for user timeline
-        $.getScript('./assets/js/vertical-timeline.js');
+      // @ts-ignore
+      $.getScript('./assets/js/vertical-timeline.js');
     }
 
     showPage(page: string) {

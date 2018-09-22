@@ -10,6 +10,7 @@ export class SyntaxHighlighterComponent implements OnInit {
 
     //  Prism js for code formating
     ngOnInit() {
-        $.getScript('./assets/js/prism.min.js');
+        // @ts-ignore
+      $.getScript('./assets/js/prism.min.js');
     }
 }

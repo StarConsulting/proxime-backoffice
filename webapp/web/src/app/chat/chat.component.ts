@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    // @ts-ignore
     $.getScript('./assets/js/chat.js');
   }
 

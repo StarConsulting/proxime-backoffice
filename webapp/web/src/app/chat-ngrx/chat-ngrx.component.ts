@@ -30,6 +30,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    // @ts-ignore
     $.getScript('./assets/js/chat.js');
     this.chatState = this.store.select('chat');
     this.subscription = this.chatState.subscribe(

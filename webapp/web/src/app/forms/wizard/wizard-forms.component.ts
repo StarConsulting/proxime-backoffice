@@ -9,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class WizardFormsComponent implements OnInit {
 
     ngOnInit() {
-        $.getScript('./assets/js/jquery.steps.min.js');
-        $.getScript('./assets/js/wizard-steps.js');
+      // @ts-ignore
+      $.getScript('./assets/js/jquery.steps.min.js');
+      // @ts-ignore
+      $.getScript('./assets/js/wizard-steps.js');
     }
 }

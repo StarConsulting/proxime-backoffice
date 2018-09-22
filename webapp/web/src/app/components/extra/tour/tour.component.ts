@@ -10,8 +10,11 @@ export class TourComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // @ts-ignore
     $.getScript('./assets/js/hopscotch.min.js');
+    // @ts-ignore
     $.getScript('./assets/js/tour.js');
+    // @ts-ignore
     $.getScript('./assets/js/prism.min.js');
   }
 

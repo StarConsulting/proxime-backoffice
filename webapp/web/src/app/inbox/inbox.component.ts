@@ -22,6 +22,7 @@ export class InboxComponent implements OnInit {
   }
 
   ngOnInit() {
+    // @ts-ignore
     $.getScript('./assets/js/inbox.js');
   }
 
